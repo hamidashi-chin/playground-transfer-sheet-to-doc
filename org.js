@@ -1,35 +1,18 @@
-function main() {
-
+function transferSheetToDoc() {
   // 1. スプレッドシートの情報を取得
   const ss = SpreadsheetApp.getActiveSpreadsheet();
-
-  writeToDoc(competencyValues(ss), targetNewDoc());
-
-  Logger.log('転記が完了しました。');
-  SpreadsheetApp.getUi().alert('Googleドキュメントへの転記が完了しました。ログでURLを確認してください。');
-}
-
-function competencyValues(ss) {
   // '評価データシート' という名前のシートを対象とする（実際のシート名に変更してください）
-  const sheet = ss.getSheetByName(CONFIG.COMPETENCY_ITEM);
+  const sheet = ss.getSheetByName('評価データシート');
   // データが2行目から始まっていると仮定（ヘッダーを除く）
   // A列:氏名, B列:評価項目1, C列:エピソード1, D列:評価項目2, E列:エピソード2 ... と仮定
   const dataRange = sheet.getRange(2, 1, sheet.getLastRow() - 1, sheet.getLastColumn());
-  return dataRange.getValues(); // シートのデータを二次元配列で取得
-}
-
-function targetNewDoc() {
+  const values = dataRange.getValues(); // シートのデータを二次元配列で取得
 
   // 2. 新しいGoogleドキュメントを作成
-  const docName = CONFIG.COMPETENCY_ITEM + " - 評価まとめ"; // ドキュメント名をスプレッドシート名から生成
+  const docName = ss.getName() + " - 評価まとめ"; // ドキュメント名をスプレッドシート名から生成
   const doc = DocumentApp.create(docName);
-  let body = doc.getBody();
+  const body = doc.getBody();
   Logger.log('Created document: ' + doc.getUrl()); // 作成されたドキュメントのURLをログに出力
-
-  return body;
-}
-
-function writeToDoc(values, body) {
 
   // 3. 各行（各個人）のデータをドキュメントに書き込む
   values.forEach(function(row, index) {
@@ -55,4 +38,8 @@ function writeToDoc(values, body) {
     }
     // --- ここまでの書き込み処理を、データ構造に合わせて調整 ---
   });
+
+  Logger.log('転記が完了しました。');
+  SpreadsheetApp.getUi().alert('Googleドキュメントへの転記が完了しました。ログでURLを確認してください。');
 }
+
