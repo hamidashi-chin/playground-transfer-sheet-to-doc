@@ -2,8 +2,10 @@ function main() {
 
   // 1. スプレッドシートの情報を取得
   const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheetValues = competencyValues(ss);
+  const newDoc = targetNewDoc();
 
-  writeToDoc(competencyValues(ss), targetNewDoc());
+  writeToDoc(sheetValues, newDoc);
 
   Logger.log('転記が完了しました。');
   SpreadsheetApp.getUi().alert('Googleドキュメントへの転記が完了しました。ログでURLを確認してください。');
@@ -33,6 +35,7 @@ function writeToDoc(values, body) {
 
   // 3. 各行（各個人）のデータをドキュメントに書き込む
   values.forEach(function(row, index) {
+    // Logger.log(row);
     // --- ここから下の列番号 (row[0], row[1] など) は、実際の列構成に合わせてください ---
     const name = row[0]; // A列の氏名を取得
     const competency1 = row[1]; // B列の評価項目1
