@@ -1,5 +1,30 @@
 {
+  "name": "transfer-sheet-to-doc",
+  "version": "1.0.0",
+  "description": "スプシ→GoogleDocに変換して貼り付けるの、ラクしたい 具体的な目的はひみつ",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "levhub:takafumi-takehara-lvgs/transfer-sheet-to-doc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.14.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
   "dependencies": {
-    "@google/clasp": "^3.0.3-alpha"
+    "commander": "^13.1.0",
+    "dotenv": "^16.5.0",
+    "googleapis": "^148.0.0"
   }
 }
