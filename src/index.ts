@@ -1,6 +1,3 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
 import { GoogleSheetClient } from "./infrastructure/google/GoogleSheetClient";
 
 // const sheetId = '1Tb0gZxGOCiBlbFZKZdXgXp5dV-IDtX3J';
