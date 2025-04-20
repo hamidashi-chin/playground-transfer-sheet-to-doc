@@ -1,0 +1,22 @@
+{
+  "itemName": "B1",
+  "perspectives": {
+    "current": {
+      "level": "A2",
+      "perspective": "B2",
+      "example": "C2"
+    },
+    "upper": {
+      "level": "A3",
+      "perspective": "B3",
+      "example": "C3"
+    }
+  },
+  "valuationTargets": {
+    "startLine": "6",
+    "episode": "C",
+    "targetEvaluation": "D",
+    "supervisorEvaluation": "E",
+    "targetName": "F"
+  }
+}
