@@ -43,3 +43,7 @@ test('正常にconfig.jsonを読み込める', () => {
   const config = loadConfig(mockConfigPath);
   expect(config).toEqual(mockConfig);
 });
+
+test('存在しないファイルを指定したら例外になる', () => {
+  expect(() => loadConfig('not-found.json')).toThrow();
+});
