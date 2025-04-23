@@ -49,3 +49,15 @@ test('perspectives.upperを読み取って格納させる', () => {
     example: '具体例B'
   });
 });
+
+test('valuationTargetsを走査してエピソードを格納できる', () => {
+  const doc = DocumentFactory.fromExcel(mockValues, mockConfig);
+  expect(doc.episodes).toEqual([
+    {
+      targetName: '山田太郎',
+      episode: 'OJTでサポートした',
+      targetEvaluation: '4',
+      supervisorEvaluation: '3'
+    }
+  ]);
+});
