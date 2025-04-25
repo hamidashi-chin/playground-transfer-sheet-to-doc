@@ -1,38 +1,16 @@
 import { CompetencyDocument } from "../src/domain/CompetencyDocument";
 
-test('toMarkdownで観点と評価が含まれる Markdownを生成できる', () => {
-  const doc = new CompetencyDocument(
-    'チームワーク',
-    [
-      {title: 'チームワーク', description: ['ほげほげ']}
-    ],
-    [
-      {name: 'ふがふが', content: 'テストテスト'},
-      {name: 'ぴよぴよ', content: 'テストテストテスト'}
-    ]
-  );
+describe('CompetencyDocument', () => {
+  test('タイトルと水平線までをMarkdownに変換できる', () => {
+    const doc = new CompetencyDocument(
+      'チームワーク',
+      [],
+      []
+    );
 
-  const expected = 'hoge';
+    const markdown = doc.toMarkdown();
 
-//   const expected = `# チームワーク
-
-// ## チームワーク
-
-// ほげほげ
-
-// ---
-
-// ### ふがふが
-
-// テストテスト
-
-// ---
-
-// ### ぴよぴよ
-
-// テストテストテスト
-
-// ---`;
-
-  expect(doc.toMarkdown().trim()).toBe(expected.trim());
+    expect(markdown).toContain('# チームワーク');
+    expect(markdown).toContain('---');
+  });
 });

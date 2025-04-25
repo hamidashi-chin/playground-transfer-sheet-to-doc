@@ -16,6 +16,6 @@ export class CompetencyDocument {
   ) {}
 
   toMarkdown(): string {
-    return 'hoge';
+    return `# ${this.competencyName}\n\n---\n`;
   }
 }
