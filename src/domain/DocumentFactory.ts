@@ -5,9 +5,15 @@ import { CompetencyDocument } from "./CompetencyDocument";
 export class DocumentFactory {
   static fromExcel(values: string[][], config: Config): CompetencyDocument {
 
+    /**
+     * コンピ項目を取得します
+     */
     const [titleRow, titleCol] = cellToIndexes(config.itemName);
     const title = values[titleRow]?.[titleCol] ?? '';
 
+    /**
+     * 現等級の観点等取得します
+     */
     const current = config.perspectives.current;
     const [levelRow, levelCol] = cellToIndexes(current.level);
     const [perspRow, perspCol] = cellToIndexes(current.perspective);
@@ -21,6 +27,9 @@ export class DocumentFactory {
       example: values[exRow]?.[exCol] ?? ''
     };
 
+    /**
+     * １つ上の等級の観点等取得します
+     */
     const upper = config.perspectives.upper;
     const [uLevelRow, uLevelCol] = cellToIndexes(upper.level);
     const [uPerspRow, uPerspCol] = cellToIndexes(upper.perspective);
@@ -34,6 +43,27 @@ export class DocumentFactory {
       example: values[uExRow]?.[uExCol] ?? '',
     };
 
-    return new CompetencyDocument(title, [perspectiveCurrent, perspectiveUpper], []);
+    /**
+     * エピソード取得します
+     */
+    const startRow = parseInt(config.valuationTargets.startLine, 10) - 1;
+    const episodes = [];
+    for (let row = startRow; row < values.length; row++) {
+      const episode = values[row]?.[cellToIndexes(config.valuationTargets.episode + row)[1]] ?? '';
+      const targetEval = values[row]?.[cellToIndexes(config.valuationTargets.targetEvaluation + row)[1]] ?? '';
+      const supervisorEval = values[row]?.[cellToIndexes(config.valuationTargets.supervisorEvaluation + row)[1]] ?? '';
+      const name = values[row]?.[cellToIndexes(config.valuationTargets.targetName + row)[1]] ?? '';
+
+      if (!episode && !targetEval && !supervisorEval && !name) continue;
+
+      episodes.push({
+        targetName: name,
+        episode,
+        targetEvaluation: targetEval,
+        supervisorEvaluation: supervisorEval,
+      });
+    }
+
+    return new CompetencyDocument(title, [perspectiveCurrent, perspectiveUpper], episodes);
   }
 }

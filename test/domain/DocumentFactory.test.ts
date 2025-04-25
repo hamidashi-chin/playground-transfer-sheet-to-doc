@@ -2,7 +2,7 @@ import { Config } from "../../config/loadConfig";
 import { DocumentFactory } from "../../src/domain/DocumentFactory";
 
 const mockValues = [
-  ['', '', 'チームワーク'], // B1 = itemName
+  ['', 'チームワーク', ''], // B1 = itemName
   ["2\n(現)", 'メンバーを育成する', '具体例A'], // A2~C2 = current
   ['3\n(上)', 'メンバーを巻き込んで育成する', '具体例B'], // A3~C3 = upper
   [], [], // 空行
@@ -25,10 +25,10 @@ const mockConfig: Config = {
   }
 };
 
-// test('itemNameを読み取ってtitleに設定できる', () => {
-//   const doc = DocumentFactory.fromExcel(mockValues, mockConfig);
-//   expect(doc.title).toBe('チームワーク');
-// });
+test('itemNameを読み取ってtitleに設定できる', () => {
+  const doc = DocumentFactory.fromExcel(mockValues, mockConfig);
+  expect(doc.competencyName).toBe('チームワーク');
+});
 
 test('perspectives.currentを読み取って格納させる', () => {
   const doc = DocumentFactory.fromExcel(mockValues, mockConfig);
