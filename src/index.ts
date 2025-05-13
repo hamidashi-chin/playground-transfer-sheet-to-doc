@@ -1,4 +1,5 @@
-import { GoogleSheetClient } from "./infrastructure/google/GoogleSheetClient";
+import { loadConfig } from "../config/loadConfig";
+import { readExcelFile } from "./infrastructure/excel/readExcelFile";
 
 // const sheetId = '1Tb0gZxGOCiBlbFZKZdXgXp5dV-IDtX3J';
 const sheetId = '1U6HQuh5IfwgKzcIe7CdC3GUgDV_MgcCjjy0oYsIKZxY';
@@ -7,8 +8,8 @@ const sheetId = '1U6HQuh5IfwgKzcIe7CdC3GUgDV_MgcCjjy0oYsIKZxY';
 const range = 'sheet01!A1:I30';
 
 async function main() {
-  const client = new GoogleSheetClient();
-  const values = await client.getSheetValues(sheetId, range);
+  const config = loadConfig('config.json');
+  const values = readExcelFile('sample.xlsx');
   console.log('読み取った内容：', values);
 }
 
