@@ -3,13 +3,10 @@ import { cellToIndexes } from "../utils/cell";
 import { CompetencyDocument } from "./CompetencyDocument";
 
 export class DocumentFactory {
-  static fromExcel(values: string[][], config: Config): CompetencyDocument {
+  static fromExcel(values: string[][], config: Config, competencyName: string): CompetencyDocument {
 
-    /**
-     * コンピ項目を取得します
-     */
-    const [titleRow, titleCol] = cellToIndexes(config.itemName);
-    const title = values[titleRow]?.[titleCol] ?? '';
+    // コンピテンシー名を取得します
+    const title = competencyName;
 
     /**
      * 現等級の観点等取得します

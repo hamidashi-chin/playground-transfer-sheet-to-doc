@@ -11,7 +11,29 @@ const mockValues = [
 ];
 
 const mockConfig: Config = {
-  itemName: 'B1',
+  itemNames: [
+    "リーダーシップ",
+    "強制力",
+    "育成力",
+    "チームワーク",
+    "達成志向性",
+    "顧客志向性",
+    "組織指向性",
+    "自信",
+    "イニシアティブ",
+    "柔軟性",
+    "徹底確認力",
+    "誠実性",
+    "セルフコントロール",
+    "専門性",
+    "分析的思考力",
+    "概念的思考力",
+    "情報指向性",
+    "対人影響力",
+    "対人理解力",
+    "組織感覚力",
+    "関係構築力"
+  ],
   perspectives: {
     current: { level: 'A2', perspective: 'B2', example: 'C2' },
     upper: { level: 'A3', perspective: 'B3', example: 'C3' }
@@ -26,12 +48,12 @@ const mockConfig: Config = {
 };
 
 test('itemNameを読み取ってtitleに設定できる', () => {
-  const doc = DocumentFactory.fromExcel(mockValues, mockConfig);
+  const doc = DocumentFactory.fromExcel(mockValues, mockConfig, mockConfig.itemNames[3]);
   expect(doc.competencyName).toBe('チームワーク');
 });
 
 test('perspectives.currentを読み取って格納させる', () => {
-  const doc = DocumentFactory.fromExcel(mockValues, mockConfig);
+  const doc = DocumentFactory.fromExcel(mockValues, mockConfig, mockConfig.itemNames[3]);
   expect(doc.perspectives[0]).toEqual({
     type: 'current',
     level: 2,
@@ -41,7 +63,7 @@ test('perspectives.currentを読み取って格納させる', () => {
 });
 
 test('perspectives.upperを読み取って格納させる', () => {
-  const doc = DocumentFactory.fromExcel(mockValues, mockConfig);
+  const doc = DocumentFactory.fromExcel(mockValues, mockConfig, mockConfig.itemNames[3]);
   expect(doc.perspectives[1]).toEqual({
     type: 'upper',
     level: 3,
@@ -51,7 +73,7 @@ test('perspectives.upperを読み取って格納させる', () => {
 });
 
 test('valuationTargetsを走査してエピソードを格納できる', () => {
-  const doc = DocumentFactory.fromExcel(mockValues, mockConfig);
+  const doc = DocumentFactory.fromExcel(mockValues, mockConfig, mockConfig.itemNames[3]);
   expect(doc.episodes).toEqual([
     {
       targetName: '山田太郎',

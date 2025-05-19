@@ -5,7 +5,29 @@ import { Config, loadConfig } from '../../config/loadConfig';
 const mockConfigPath = path.join(__dirname, 'mockConfig.json');
 
 const mockConfig: Config = {
-  itemName: "B1",
+  itemNames: [
+    "リーダーシップ",
+    "強制力",
+    "育成力",
+    "チームワーク",
+    "達成志向性",
+    "顧客志向性",
+    "組織指向性",
+    "自信",
+    "イニシアティブ",
+    "柔軟性",
+    "徹底確認力",
+    "誠実性",
+    "セルフコントロール",
+    "専門性",
+    "分析的思考力",
+    "概念的思考力",
+    "情報指向性",
+    "対人影響力",
+    "対人理解力",
+    "組織感覚力",
+    "関係構築力"
+  ],
   perspectives: {
     current: { level: "A2", perspective: "B2", example: "C2" },
     upper: { level: "A3", perspective: "B3", example: "C3" }
@@ -29,7 +51,7 @@ afterAll(() => {
 
 test('itemNameを取得できる', () => {
   const config = loadConfig(mockConfigPath);
-  expect(config.itemName).toEqual('B1');
+  expect(config.itemNames[0]).toEqual('リーダーシップ');
 });
 
 test('現等級のレベル、観点、エピソード例が取得できる', () => {

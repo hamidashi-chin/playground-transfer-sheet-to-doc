@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 
 export type Config = {
-  itemName: string;
+  itemNames: string[];
   perspectives: {
     current: PerspectiveCells;
     upper: PerspectiveCells;

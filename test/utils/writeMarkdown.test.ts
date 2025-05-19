@@ -6,6 +6,7 @@ describe('writeMarkdownToFile', () => {
   const outputDir = path.resolve(__dirname, '../../test-output');
   const title = 'test_document';
   const expectedPath = path.join(outputDir, `${title}.md`);
+  console.log(`expectedPath: ${expectedPath}`);
 
   afterAll(() => {
     if (fs.existsSync(outputDir)) {
