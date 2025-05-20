@@ -12,7 +12,12 @@ async function main() {
   const allValidatedCompetencies = readExcelSheets(inputExcelPath);
   const outputDir = getTimestampDirName(path.join(__dirname, '../output'));
 
-  for (const [competencyName, values] of Object.entries(allValidatedCompetencies)) {
+  for (const competencyName of config.itemNames) {
+    const values = allValidatedCompetencies[competencyName];
+    if (!values) {
+      console.warn(`⚠️ シート ${competencyName} はExcelに存在しません。スキップします。`);
+      continue;
+    }
     const doc = DocumentFactory.fromExcel(values, config, competencyName);
     const markdown = doc.toMarkdown();
     writeMarkdownToFile(markdown, competencyName, outputDir);
