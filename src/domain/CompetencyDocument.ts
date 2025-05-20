@@ -19,21 +19,14 @@ export class CompetencyDocument {
 
     let markdown = `# ${this.competencyName}\n\n`;
 
-    const current = this.perspectives.find(p => p.type === 'current');
-    if (current) {
-      markdown += `## 現在の評価観点\n`;
-      markdown += `- レベル: レベル${current.level}\n`;
-      markdown += `- 観点: ${current.perspective}\n`;
-      markdown += `- 具体例: ${current.example}\n\n`;
-    }
-
-    const upper = this.perspectives.find(p => p.type === 'upper');
-    if (upper) {
-      markdown += `## 上位の期待値\n`;
-      markdown += `- レベル: レベル${upper.level}\n`;
-      markdown += `- 観点: ${upper.perspective}\n`;
-      markdown += `- 具体例: ${upper.example}\n\n`;
-    }
+    const lines: string[] = [];
+    (['current', 'upper'] as const).forEach(type => {
+      const perspective = this.perspectives.find(p => p.type === type);
+      if (perspective) {
+        lines.push(...this.formatPerspectiveSection(type, perspective));
+      }
+    });
+    markdown += lines.join('\n');
 
     markdown += `---\n\n`;
 
@@ -46,5 +39,19 @@ export class CompetencyDocument {
     }
 
     return markdown;
+  }
+
+  private formatPerspectiveSection(
+    type: 'current' | 'upper',
+    perspective: {level: string; perspective: string; example: string}
+  ): string[] {
+    const label = type === 'upper' ? '上位の期待値' : '現在の評価観点';
+    return [
+      `## ${label}`,
+      `- レベル: ${perspective.level}`,
+      `- 観点: ${perspective.perspective}`,
+      `- 具体例: ${perspective.example}`,
+      ''
+    ];
   }
 }

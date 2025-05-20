@@ -63,4 +63,8 @@ export class DocumentFactory {
 
     return new CompetencyDocument(title, [perspectiveCurrent, perspectiveUpper], episodes);
   }
+
+  // extractPerspectiveFromSheet() {
+
+  // }
 }
