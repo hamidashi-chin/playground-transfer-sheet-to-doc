@@ -12,7 +12,7 @@ export function cellToIndexes(cell: string): [number, number] {
    */
   let col = 0;
   for (let i = 0; i < colLetters.length; i++) {
-    col *= 26;
+    col *= 26; // 26はアルファベットの数26個あるからそれのことね！！
     col += colLetters.charCodeAt(i) - 'A'.charCodeAt(0) + 1;
   }
 
